@@ -1,11 +1,17 @@
-// CampusEats task list
+const VIP_DISCOUNT = 0.1;
 
-// CampusEats task list
+function calculateTotal(price, quantity, customerType) {
+  if (price < 0 || quantity < 0) {
+    throw new Error("price and quantity must be >= 0");
+  }
 
-const tasks = [
-  "Design the menu screen",
-  "Build the orders API",
-  "Add user login",
-];
+  const subtotal = price * quantity;
 
-console.log(`CampusEats has ${tasks.length} open tasks`);
+  return customerType === "vip"
+    ? subtotal * (1 - VIP_DISCOUNT)
+    : subtotal;
+}
+
+// The API key should come from an environment variable.
+// Example: process.env.API_KEY
+// Never hard-code secrets.
